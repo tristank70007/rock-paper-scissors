@@ -25,64 +25,79 @@ while True:
         play_count = int(input('How many times do you want to play: '))
         break
     except ValueError:
-        print('Try again and choose a number')
+        print('Try again and put in a number I can understand like 9 or 32.')
         
 # Creating list and random item variable
 game_options = ['Rock','Paper', 'Scissors']
 
-random_option = random.choice(game_options)
-
-
-# Creating variable for player's option
+# Creating list of acceptable player options
 acceptable_options = ['R','Rock','P','Paper','Scissors','S',1,2,3]
 
-while True:
-    player_option = input('Choose An Option: ')
-    if type(player_option) == str:
-        player_option = player_option.title()
-    
-    if player_option in acceptable_options:
-        print('Good choice')
-        break
-    else:
-        print('Try again')
-        
-
-# Giving player option one of three values
-if player_option in ['Rock','R',1]:
-    player_option = 'Rock'
-elif player_option in ['P','Paper',2]:
-    player_option = 'Paper'
-else:
-    player_option = 'Scissors'
-    
-# Playing the game
+# Creating loop for # of gameso
 win_count = 0
 tie_count = 0
-for games in range(1,play_count):
+for games in range(1,play_count+1):
+    # Random option for the program
+    random_option = random.choice(game_options)
+
+    # Creating variable for player's option
+    while True:
+        player_option = input('Choose An Option For Round {}: '.format(games))
+        if type(player_option) == str:
+            player_option = player_option.title()
+        
+        if player_option in acceptable_options:
+            print('Good choice')
+            break
+        else:
+            print('Try again')
+            
+
+    # Giving player option one of three values
+    if player_option in ['Rock','R',1]:
+        player_option = 'Rock'
+    elif player_option in ['P','Paper',2]:
+        player_option = 'Paper'
+    else:
+        player_option = 'Scissors'
+    
+# Playing the game
+
     if random_option == 'Paper' and player_option == 'Paper':
         win_count = win_count
         tie_count = tie_count + 1
+        outcome = 'we tie'
     elif random_option == 'Paper' and player_option == 'Scissors':
         win_count = win_count + 1
+        outcome = 'you win'
     elif random_option == 'Paper' and player_option == 'Rock':
         win_count = win_count
+        outcome = 'I win'
     elif random_option == 'Rock' and player_option == 'Paper':
         win_count = win_count + 1
+        outcome = 'you win'
     elif random_option == 'Rock' and player_option == 'Scissors':
         win_count = win_count
+        outcome = 'I win'
     elif random_option == 'Rock' and player_option == 'Rock':
         win_count = win_count
         tie_count = tie_count + 1
+        outcome = 'we tie'
     elif random_option == 'Scissors' and player_option == 'Paper':
         win_count = win_count
+        outcome = 'I win'
     elif random_option == 'Scissors' and player_option == 'Rock':
         win_count = win_count + 1
+        outcome = 'you win'
     elif random_option == 'Scissors' and player_option == 'Scissors':
         win_count = win_count
         tie_count = tie_count + 1
+        outcome = 'we tie'
+    
+    # Giving user info about round outcome
+    print("You chose {0} and I chose {1} so {2}".format(player_option, random_option, outcome))
 
-print("You won {} games".format(win_count))
+print("You won {0} games and we tied {1} games".format(win_count, tie_count))
     
     
 
