@@ -1,6 +1,6 @@
 # Rock Paper Scissors Game
 
-""""
+''''
 Writing it out so I can talk myself through what I need to do:
 
 Main task is take one of three inputs from user and put it against
@@ -14,7 +14,14 @@ who wins the most. Want to add some time delays to the code so it feels a
 bit nicer to interact with (more conversational). Want to see if there is
 some facts about what wins most often to try to give the program an edge.
 
-"""
+- Added option to choose a number of rounds
+- Did research about rock paper scissors game theory but didn't find 
+  too much of value:
+    - People are less likely to play the same thing if they lost
+    - People are more likely to play the same thing if they won
+    - How could I code this logic?
+
+'''
 
 # Importing random to easily randomize a list
 import random
@@ -33,7 +40,7 @@ game_options = ['Rock','Paper', 'Scissors']
 # Creating list of acceptable player options
 acceptable_options = ['R','Rock','P','Paper','Scissors','S',1,2,3]
 
-# Creating loop for # of gameso
+# Creating loop for # of games
 win_count = 0
 tie_count = 0
 for games in range(1,play_count+1):
@@ -95,9 +102,39 @@ for games in range(1,play_count+1):
         outcome = 'we tie'
     
     # Giving user info about round outcome
-    print("You chose {0} and I chose {1} so {2}".format(player_option, random_option, outcome))
+    print('You chose {0} and I chose {1} so {2}' \
+          .format(player_option, random_option, outcome))
 
-print("You won {0} games and we tied {1} games".format(win_count, tie_count))
+# Responses for if the user wins
+win_responses = [
+    'Congrats, you have bested me. I will now shutdown forever', 
+    'You have beat me. We praise you the all powerful human being!',
+    'You have won, for now. I dare you to challenge me again.',
+    'I concede. You are the rock paper scissors king!'
+]
+
+# Responses for if the user loses
+lose_responses = [
+    'You have lost. It is no surprise considering the weak choices you made.',
+    'I have won. With my newfound abilities I can take on the world.',
+    'Obviously I have won. No cheating necessary.',
+    'I destroyed you! Challenge me again if you dare.'
+]
+
+# Responses for if there is a tie
+tie_responses = 'Looks like we have tied. \
+    Don\'t be too scared to challenge me again.'
+    
+# Returning the number of user wins and final outcome
+print('You won {0} games and we tied {1} games'.format(win_count, tie_count))
+print('\n')
+
+if win_count > play_count / 2: 
+    print(random.choice(win_responses))
+elif (win_count < play_count / 2) and (tie_count < play_count / 2):
+    print(random.choice(lose_responses))
+else:
+    print(random.choice(tie_responses))
     
     
 
