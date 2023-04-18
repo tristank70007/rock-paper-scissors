@@ -23,13 +23,24 @@ some facts about what wins most often to try to give the program an edge.
 
 '''
 
-# Importing random to easily randomize a list
+# Importing random to easily randomize a list and time for some pauses
 import random
+import time
+
+# Introduction Text
+print('Hello! I hope you are doing well.\n')
+time.sleep(3)
+print('Let\'s play some rock, paper, scissors!\n')
 
 # Number of times user wants to play
 while True:
     try:
         play_count = int(input('How many times do you want to play: '))
+        time.sleep(2)
+        if play_count == 1:
+            print('So we are playing 1 time. Someone is scared of losing!')
+        else:
+            print('{} times? More chances for me to destroy you.'.format(play_count))
         break
     except ValueError:
         print('Try again and put in a number I can understand like 9 or 32.')
@@ -38,7 +49,13 @@ while True:
 game_options = ['Rock','Paper', 'Scissors']
 
 # Creating list of acceptable player options
-acceptable_options = ['R','Rock','P','Paper','Scissors','S',1,2,3]
+acceptable_options = ['R','Rock','P','Paper','Scissors','S']
+
+# Showing user options
+print('\nYou have three options to choose from: ')
+print('Rock, Paper, Scissors')
+print('\nDon\'t worry about capitalizing. You can even put the number',
+    'or just the first letter in')
 
 # Creating loop for # of games
 win_count = 0
@@ -61,14 +78,14 @@ for games in range(1,play_count+1):
             
 
     # Giving player option one of three values
-    if player_option in ['Rock','R',1]:
+    if player_option in ['Rock','R']:
         player_option = 'Rock'
-    elif player_option in ['P','Paper',2]:
+    elif player_option in ['P','Paper']:
         player_option = 'Paper'
     else:
         player_option = 'Scissors'
     
-# Playing the game
+    # Playing the game
 
     if random_option == 'Paper' and player_option == 'Paper':
         win_count = win_count
@@ -104,6 +121,9 @@ for games in range(1,play_count+1):
     # Giving user info about round outcome
     print('You chose {0} and I chose {1} so {2}' \
           .format(player_option, random_option, outcome))
+    if play_count > 1:
+        time.sleep(1)
+        print('Great round, let\'s go again!')
 
 # Responses for if the user wins
 win_responses = [
@@ -126,8 +146,7 @@ tie_responses = 'Looks like we have tied. \
     Don\'t be too scared to challenge me again.'
     
 # Returning the number of user wins and final outcome
-print('You won {0} games and we tied {1} games'.format(win_count, tie_count))
-print('\n')
+print('You won {0} games and we tied {1} games.\n'.format(win_count, tie_count))
 
 if win_count > play_count / 2: 
     print(random.choice(win_responses))
@@ -135,7 +154,8 @@ elif (win_count < play_count / 2) and (tie_count < play_count / 2):
     print(random.choice(lose_responses))
 else:
     print(random.choice(tie_responses))
-    
+
+print('\nGood games! Tell me if you want to go again.')
     
 
 
